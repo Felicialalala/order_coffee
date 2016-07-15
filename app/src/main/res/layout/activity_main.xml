@@ -63,11 +63,11 @@
         android:layout_below="@id/buttom_decrease"
         android:paddingBottom="8dp"
         android:paddingTop="16dp"
-        android:text="PRICE"
+        android:text="ORDER SUMMARY"
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/price_text_view"
+        android:id="@+id/order_summary_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/price"
@@ -81,7 +81,7 @@
         android:id="@+id/buttom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/price_text_view"
+        android:layout_below="@+id/order_summary_text_view"
         android:onClick="submitOrder"
         android:paddingTop="8dp"
         android:text="ORDER"

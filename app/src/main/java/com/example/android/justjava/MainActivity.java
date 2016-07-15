@@ -5,8 +5,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.TextView;
 
-import java.text.NumberFormat;
-
 /**
  * This app displays an order form to order coffee.
  */
@@ -24,10 +22,30 @@ public class MainActivity extends ActionBarActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-        String priceMessage = "Total: $ " + (quantity * 5)+ "\nThank You!";
-        displayMessage(priceMessage);
-       // display(quantity);
-        //displayPrice(quantity * 5);
+       // int price = calculatePrice(quantity);
+       // String priceMessage = "Total: $ " + price + "\nThank You!";
+        displayMessage(createOrderSummary());
+
+    }
+    /**
+     * Calculates the price of the order.
+     *
+     * @param quantity is the number of cups of coffee ordered
+     */
+    private int calculatePrice(int quantity) {
+        int price = quantity * 5;
+        return price;
+    }
+    /**
+     * This method creates order summary
+     */
+    private String createOrderSummary(){
+        String Name = "Amanda";
+        String orderSummary = "Name: " + Name;
+        orderSummary = orderSummary + "\nQuantity: " + quantity;
+        orderSummary = orderSummary + "\nTotal: $ " + calculatePrice(quantity);
+        orderSummary = orderSummary + "\nThank You!";
+        return orderSummary;
     }
 
     /**
@@ -38,14 +56,7 @@ public class MainActivity extends ActionBarActivity {
                 R.id.quantity_text_view);
         quantityTextView.setText("" + number);
     }
-
-    /**
-     * This method displays the given price on the screen.
-     */
-    private void displayPrice(int number) {
-        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
-        priceTextView.setText(NumberFormat.getCurrencyInstance().format(number));
-    }
+    
 
     /**
      * This method is called when the + button is cliked
@@ -69,8 +80,9 @@ public class MainActivity extends ActionBarActivity {
      * This method displays the given text on the screen.
      */
     private void displayMessage(String message) {
-        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
-        priceTextView.setText(message);
+        TextView orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
+        orderSummaryTextView.setText(message);
     }
+
 
 }
