@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * This app displays an order form to order coffee.
@@ -31,29 +32,43 @@ public class MainActivity extends ActionBarActivity {
         boolean hasChocolate = chocolateCheckBox.isChecked();
         EditText nameFeild = (EditText)findViewById(R.id.name_field);
         String name = nameFeild.getText().toString();
-
-        int price = calculatePrice(quantity);
-        displayMessage(createOrderSummary(price,hasWhippedCream,hasChocolate,name));
-
+        int totalPrice = calculatePrice(quantity, hasWhippedCream,hasChocolate);
+        String message = createOrderSummary(totalPrice, hasWhippedCream,hasChocolate,name);
+        displayMessage(message);
+//      mail intent
+//        Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+//        emailIntent.setData(Uri.parse("mailto"));
+//        emailIntent.setType("text/plain");
+//        emailIntent.putExtra(Intent.EXTRA_EMAIL, "Starbucks@gmail.com");
+//        emailIntent.putExtra(Intent.EXTRA_SUBJECT,"Just java order for" + name);
+//        emailIntent.putExtra(Intent.EXTRA_TEXT,message );
+//        startActivity(Intent.createChooser(emailIntent,"Download a mail app first"));
     }
     /**
      * Calculates the price of the order.
      *
      * @param quantity is the number of cups of coffee ordered
      */
-    private int calculatePrice(int quantity) {
-        int price = quantity * 5;
-        return price;
+    private int calculatePrice(int quantity, boolean hasWhippedCream, boolean hasChocolate) {
+        //basic price
+        int price = 5;
+        //add $1 if whipped cream added
+        if(hasWhippedCream) price += 1;
+        //add $2 if chocolate added
+        if(hasChocolate)    price += 2;
+        int totalPrice = quantity * price;
+        return totalPrice;
     }
     /**
      * This method creates order summary
      */
-    private String createOrderSummary(int price, boolean hasWhippedCream, boolean hasChocolate, String name){
+    public String createOrderSummary(int price, boolean hasWhippedCream, boolean hasChocolate, String name){
         String orderSummary = "Name: " + name;
+        int totalPrice = calculatePrice(quantity,hasWhippedCream,hasChocolate);
         orderSummary += "\nAdd whipped Cream?  " + hasWhippedCream;
         orderSummary += "\nAdd chocolate?  " + hasChocolate;
         orderSummary += "\nQuantity: " + quantity;
-        orderSummary += "\nTotal: $ " + calculatePrice(quantity);
+        orderSummary += "\nTotal: $ " + totalPrice;
         orderSummary += "\nThank You!";
         return orderSummary;
     }
@@ -72,7 +87,12 @@ public class MainActivity extends ActionBarActivity {
      * This method is called when the + button is cliked
      */
         public void increment(View View)   {
-
+        if(quantity >= 100 ) {
+            //show a toast message
+            Toast.makeText(this,"You cannot have more than 100 cups of coffee!",Toast.LENGTH_SHORT).show();
+            return;
+        }
+            else
         quantity = quantity + 1;
         display(quantity);
     }
@@ -81,7 +101,11 @@ public class MainActivity extends ActionBarActivity {
      * This method is called when the - button is cliked
      */
     public void decrement(View View)   {
-
+        if(quantity <= 1)   {
+            Toast.makeText(this,"You cannot have less than 1 cup of coffee!",Toast.LENGTH_SHORT).show();
+            return;
+        }
+            else
         quantity = quantity - 1;
         display(quantity);
 

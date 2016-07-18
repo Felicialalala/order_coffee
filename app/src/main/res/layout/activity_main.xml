@@ -18,14 +18,14 @@
             android:id="@+id/name_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name"
+            android:hint="@string/name"
             android:inputType="text"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TOPPINGS"
-            android:textSize="16sp"
+            android:text="@string/toppings"
+            style="@style/head"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"/>
 
@@ -34,24 +34,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="24dp"
-            android:text="Whipped Cream"
-            android:textSize="16sp" />
+            android:text="@string/whipped_cream"
+            style="@style/order_style" />
 
         <CheckBox
             android:id="@+id/chocolate_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="24dp"
-            android:text="Chocolate"
-            android:textSize="16sp" />
+            android:text="@string/chocolate"
+            style="@style/order_style" />
 
         <TextView
             android:id="@+id/quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="16dp"
-            android:text="QUANTITY"
-            android:textSize="16sp"
+            android:text="@string/quantity"
+            style="@style/head"
             android:paddingTop="16dp"/>
 
         <LinearLayout
@@ -75,8 +75,7 @@
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:text="2"
-                android:textColor="#000000"
-                android:textSize="16sp" />
+                style="@style/order_style" />
 
             <Button
                 android:id="@+id/buttom_increase"
@@ -98,8 +97,8 @@
             android:layout_below="@id/buttom_decrease"
             android:paddingBottom="8dp"
             android:paddingTop="16dp"
-            android:text="ORDER SUMMARY"
-            android:textSize="16sp" />
+            android:text="@string/order_summary"
+            style="@style/head" />
 
         <TextView
             android:id="@+id/order_summary_text_view"
@@ -108,9 +107,8 @@
             android:layout_below="@+id/price"
             android:paddingBottom="8dp"
             android:paddingTop="8dp"
-            android:text="Welcome!"
-            android:textColor="#000000"
-            android:textSize="16sp" />
+            android:text="@string/welcome"
+            style="@style/order_style"/>
 
         <Button
             android:id="@+id/buttom"
@@ -119,7 +117,7 @@
             android:layout_below="@+id/order_summary_text_view"
             android:onClick="submitOrder"
             android:paddingTop="8dp"
-            android:text="ORDER"
+            android:text="@string/order"
             android:textSize="16sp" />
 
 
