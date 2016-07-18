@@ -3,6 +3,8 @@ package com.example.android.justjava;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 /**
@@ -22,9 +24,16 @@ public class MainActivity extends ActionBarActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-       // int price = calculatePrice(quantity);
-       // String priceMessage = "Total: $ " + price + "\nThank You!";
-        displayMessage(createOrderSummary());
+        CheckBox whippedCreamCheckBox = (CheckBox)findViewById(R.id.whipped_cream_checkbox);
+        boolean hasWhippedCream = whippedCreamCheckBox.isChecked();
+       // Log.v("Main Activity", "Has whipped cream: " + hasWhippedCream);
+        CheckBox chocolateCheckBox = (CheckBox)findViewById(R.id.chocolate_checkbox);
+        boolean hasChocolate = chocolateCheckBox.isChecked();
+        EditText nameFeild = (EditText)findViewById(R.id.name_field);
+        String name = nameFeild.getText().toString();
+
+        int price = calculatePrice(quantity);
+        displayMessage(createOrderSummary(price,hasWhippedCream,hasChocolate,name));
 
     }
     /**
@@ -39,12 +48,13 @@ public class MainActivity extends ActionBarActivity {
     /**
      * This method creates order summary
      */
-    private String createOrderSummary(){
-        String Name = "Amanda";
-        String orderSummary = "Name: " + Name;
-        orderSummary = orderSummary + "\nQuantity: " + quantity;
-        orderSummary = orderSummary + "\nTotal: $ " + calculatePrice(quantity);
-        orderSummary = orderSummary + "\nThank You!";
+    private String createOrderSummary(int price, boolean hasWhippedCream, boolean hasChocolate, String name){
+        String orderSummary = "Name: " + name;
+        orderSummary += "\nAdd whipped Cream?  " + hasWhippedCream;
+        orderSummary += "\nAdd chocolate?  " + hasChocolate;
+        orderSummary += "\nQuantity: " + quantity;
+        orderSummary += "\nTotal: $ " + calculatePrice(quantity);
+        orderSummary += "\nThank You!";
         return orderSummary;
     }
 
